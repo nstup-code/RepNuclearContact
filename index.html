@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Your MD Representative</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #0056b3;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #003d82;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Contact Your Representative (MD)</h2>
+  <p>Edit or copy the message below, then proceed to the official U.S. House lookup tool to find your representative's contact page.</p>
+
+  <textarea id="message">Hello, I am a constituent from Maryland writing to share my views on...</textarea>
+
+  <button onclick="copyAndRedirect()">Copy Message & Go to Contact Page</button>
+  <div id="status" class="status"></div>
+
+  <script>
+    async function copyAndRedirect() {
+      const text = document.getElementById('message').value;
+      const statusDiv = document.getElementById('status');
+
+      try {
+        await navigator.clipboard.writeText(text);
+        statusDiv.innerText = "Copied to clipboard! Redirecting...";
+        
+        // Wait 1 second so the user sees confirmation before tab changes/redirects
+        setTimeout(() => {
+          window.location.href = "https://www.house.gov/representatives/find-your-representative";
+        }, 1000);
+      } catch (err) {
+        statusDiv.style.color = "#dc3545";
+        statusDiv.innerText = "Failed to copy automatically. Please copy the text manually.";
+      }
+    }
+  </script>
+
+</body>
+</html>
